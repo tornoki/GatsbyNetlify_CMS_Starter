@@ -13,3 +13,9 @@ tags:
 
 [管理画面](https://app.netlify.com/sites/sleepy-mcnulty-fdbf66/overview)
 
+```test.py
+import test
+
+def test():
+  test
+```
