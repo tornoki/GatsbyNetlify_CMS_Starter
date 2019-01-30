@@ -13,4 +13,13 @@ const insertToElement = (id, word) => {
   targetElementId.insertAdjacentHTML('beforeend', word);
 };
 
-insertToElement('test_id', 'test word');
+async function testAsyncFunc(url) {
+  let response = await axios.get(url);
+  return response;
+};
+
+
+
+let x = testAsyncFunc('https://api.github.com/users/tornoki');
+
+insertToElement('test_id', x);
