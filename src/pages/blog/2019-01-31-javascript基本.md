@@ -52,5 +52,41 @@ console.log(var1)
 // -> Promise
 ```
 
-上記のように定義時点でPromiseが代入されていしまうため、明示的に時間のかかる処理を待つことで非同期関数の返り値を得ることができる。具体例は以下。
+#### thenでの記述
 
+上記のように定義時点でPromiseが代入されてしまうため、明示的に時間のかかる処理を待つことで非同期関数の返り値を得ることができる。具体例は以下。
+
+```
+function sampleFunc(url) {
+  return axios.get(url).then(response => {
+    return response.data;
+  });
+}
+
+sampleFunc(url).then((result) => {
+  console.log(result);
+};
+
+//他の例
+axios.get(url).then((response) => {
+  let items = response.data;
+  for (let item of items) {
+    console.log(item);
+  }
+}).catch(error => {
+  console.log(error);
+});
+```
+
+#### async/awaitでの記述
+
+```
+async function sampleFunc(url) {
+  let response = await axios.get(url);
+  return response.data;
+}
+
+sampleFunc(url).then((result) => {
+  console.log(result);
+}
+```
