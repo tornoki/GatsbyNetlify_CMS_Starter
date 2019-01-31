@@ -8,18 +8,34 @@ axios.get('https://api.github.com/users/tornoki')
     console.error( res );
   });
 
-const insertToElement = (id, word) => {
+function insertToElement(id, word) {
   targetElementId = document.getElementById(id);
   targetElementId.insertAdjacentHTML('beforeend', word);
-};
+}
 
-async function testAsyncFunc(url) {
-  let response = await axios.get(url);
-  return response;
-};
+let url = 'https://api.github.com/users/tornoki';
 
+async function testFunc(url) {
+  const result = await axios.get(url);
+  insertToElement('test_id', result.data.avatar_url);
+}
 
+testFunc(url);
 
-let x = testAsyncFunc('https://api.github.com/users/tornoki');
+//axios.get()は時間がかかる処理のためPromiseオブジェクトを返す.
+async function returnAPI(url) {
+  const result = await axios.get(url);
+  let x = result.data.id
+  return x;
+}
 
-insertToElement('test_id', x);
+returnAPI(url).then((result) => {
+  insertToElement('test_id2', result);
+});
+
+//だめな例
+let var1 = axios.get(url).then((response) => {
+  let items = response.data.id;
+  console.log(items);
+});
+console.log(var1);
